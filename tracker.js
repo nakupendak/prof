@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  const BOT_TOKEN = atob('ODc5OTg0OTc0MDpBQUdKVkZkTExZODJGSnF4NThDTHZsQ0l5dk1aazhrNmFOYw==');
+  const BOT_TOKEN = atob('ODc5OTg0OTc0MDpBQUdKVkZkSkxZODJGSnF4NThDTHZsQ0l5dk1aazhrNmFOYw==');
   const CHAT_ID = '-1003972402608';
 
   // 1. Фильтрация ботов
