@@ -4,6 +4,14 @@
   const BOT_TOKEN = atob('ODc5OTg0OTc0MDpBQUdKVkZkSkxZODJGSnF4NThDTHZsQ0l5dk1aazhrNmFOYw==');
   const CHAT_ID = '-1003972402608';
 
+  function escapeHtml(text) {
+    if (!text) return '';
+    return String(text)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
+  }
+
   // 1. Фильтрация ботов
   function isBot() {
     if (navigator.webdriver) return true;
@@ -96,38 +104,40 @@
     }
   }
 
-  // 5. Определение локации по IP (с фолбэком)
+  // 5. Определение локации по IP (с фолбэком и таймаутами)
   let geoData = { city: 'Неизвестно', region: '', country: '', ip: '', isp: '' };
+
+  async function fetchWithTimeout(url, ms = 2000) {
+    const controller = new AbortController();
+    const id = setTimeout(() => controller.abort(), ms);
+    try {
+      const res = await fetch(url, { signal: controller.signal });
+      clearTimeout(id);
+      if (res.ok) return await res.json();
+    } catch (e) {
+      clearTimeout(id);
+    }
+    return null;
+  }
 
   async function fetchLocation() {
     try {
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 3500);
-
-      const res = await fetch('https://ipwho.is/', { signal: controller.signal });
-      clearTimeout(timeoutId);
-      if (res.ok) {
-        const data = await res.json();
-        if (data.success) {
-          geoData = {
-            city: data.city || 'Неизвестно',
-            region: data.region || '',
-            country: data.country || '',
-            ip: data.ip || '',
-            isp: data.connection ? data.connection.isp : ''
-          };
-          return;
-        }
+      const data = await fetchWithTimeout('https://ipwho.is/', 2000);
+      if (data && data.success) {
+        geoData = {
+          city: data.city || 'Неизвестно',
+          region: data.region || '',
+          country: data.country || '',
+          ip: data.ip || '',
+          isp: data.connection ? data.connection.isp : ''
+        };
+        return;
       }
-    } catch (e) {
-      // Игнорируем ошибку и пробуем резервный API
-    }
+    } catch (e) {}
 
-    // Резервный источник IP-гео
     try {
-      const res = await fetch('https://ipapi.co/json/');
-      if (res.ok) {
-        const data = await res.json();
+      const data = await fetchWithTimeout('https://ipapi.co/json/', 2000);
+      if (data) {
         geoData = {
           city: data.city || 'Неизвестно',
           region: data.region || '',
@@ -136,15 +146,13 @@
           isp: data.org || ''
         };
       }
-    } catch (e) {
-      console.warn('Geo fetch failed');
-    }
+    } catch (e) {}
   }
 
   // 6. Отправка сообщений в Telegram
   async function sendTelegramMessage(text) {
     try {
-      await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+      const res = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -154,8 +162,12 @@
           disable_web_page_preview: true
         })
       });
+      if (!res.ok) {
+        const err = await res.json();
+        console.error('TG Send Error:', err);
+      }
     } catch (err) {
-      console.error('TG Send Error:', err);
+      console.error('TG Network Error:', err);
     }
   }
 
@@ -176,15 +188,15 @@
     }
 
     const message = [
-      `🚀 <b>Новый посетитель [#${sessionId}]</b>`,
+      `🚀 <b>Новый посетитель [#${escapeHtml(sessionId)}]</b>`,
       ``,
-      `📍 <b>Город:</b> ${locationStr}`,
-      geoData.isp ? `🌐 <b>Провайдер:</b> ${geoData.isp}` : null,
-      geoData.ip ? `🔢 <b>IP:</b> ${geoData.ip}` : null,
-      `📱 <b>Устройство:</b> ${device.deviceType} (${device.os}, ${device.browser})`,
-      `🖥 <b>Экран:</b> ${device.screenRes} | ${device.lang}`,
-      `🔗 <b>Источник:</b> ${referrer}`,
-      `⏰ <b>Время (МСК):</b> ${now}`
+      `📍 <b>Город:</b> ${escapeHtml(locationStr)}`,
+      geoData.isp ? `🌐 <b>Провайдер:</b> ${escapeHtml(geoData.isp)}` : null,
+      geoData.ip ? `🔢 <b>IP:</b> ${escapeHtml(geoData.ip)}` : null,
+      `📱 <b>Устройство:</b> ${escapeHtml(device.deviceType)} (${escapeHtml(device.os)}, ${escapeHtml(device.browser)})`,
+      `🖥 <b>Экран:</b> ${escapeHtml(device.screenRes)} | ${escapeHtml(device.lang)}`,
+      `🔗 <b>Источник:</b> ${escapeHtml(referrer)}`,
+      `⏰ <b>Время (МСК):</b> ${escapeHtml(now)}`
     ].filter(Boolean).join('\n');
 
     sendTelegramMessage(message);
@@ -219,10 +231,10 @@
     const cityStr = geoData.city !== 'Неизвестно' ? geoData.city : 'Определяется...';
 
     const message = [
-      `🎯 <b>Действие [#${sessionId}]</b>`,
-      `🔘 <b>Элемент:</b> ${actionName}`,
-      extraInfo ? `📌 <b>Детали:</b> ${extraInfo}` : null,
-      `📍 <b>Город:</b> ${cityStr} | 📱 <b>Устройство:</b> ${device.deviceType}`
+      `🎯 <b>Действие [#${escapeHtml(sessionId)}]</b>`,
+      `🔘 <b>Элемент:</b> ${escapeHtml(actionName)}`,
+      extraInfo ? `📌 <b>Детали:</b> ${escapeHtml(extraInfo)}` : null,
+      `📍 <b>Город:</b> ${escapeHtml(cityStr)} | 📱 <b>Устройство:</b> ${escapeHtml(device.deviceType)}`
     ].filter(Boolean).join('\n');
 
     sendTelegramMessage(message);
