@@ -778,6 +778,30 @@ h3 {
   transform: translateX(-50%);
 }
 
+.good-place-badge {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 58px;
+  height: auto;
+  z-index: 10;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.5));
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.3s ease;
+  cursor: pointer;
+}
+
+.good-place-badge:hover {
+  transform: translateY(-3px) scale(1.08);
+  filter: drop-shadow(0 8px 20px rgba(252, 60, 0, 0.45));
+}
+
+.good-place-badge img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
 .review-service {
   display: inline-flex;
   align-items: center;
@@ -1710,6 +1734,12 @@ h3 {
   .review-stars {
     gap: 5px;
     font-size: 28px;
+  }
+
+  .good-place-badge {
+    top: 14px;
+    right: 14px;
+    width: 44px;
   }
 
   .comparison-label {
