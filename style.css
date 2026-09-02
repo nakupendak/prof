@@ -795,6 +795,10 @@ h3 {
   filter: drop-shadow(0 8px 20px rgba(252, 60, 0, 0.45));
 }
 
+[data-review-card="2gis"] .good-place-badge:hover {
+  filter: drop-shadow(0 8px 20px rgba(24, 193, 99, 0.45));
+}
+
 .good-place-badge img {
   display: block;
   width: 100%;
