@@ -218,7 +218,7 @@ img {
   background-color: #e5e7eb;
   background-image:
     linear-gradient(125deg, rgba(229, 45, 39, 0.1), transparent 30%),
-    url("zaezd.png");
+    url("zaezd.webp");
   background-position: center;
   background-size: cover;
 }
@@ -226,7 +226,7 @@ img {
 .image-panel {
   background-image:
     linear-gradient(125deg, rgba(229, 45, 39, 0.1), transparent 30%),
-    url("work.jpeg");
+    url("work.webp");
 }
 
 .hero-media {
@@ -530,8 +530,8 @@ h3 {
   border-top: 1px solid var(--line);
 }
 
-.services-section > *,
-.reviews-section > * {
+.services-section>*,
+.reviews-section>* {
   position: relative;
   z-index: 1;
 }
@@ -548,10 +548,10 @@ h3 {
   overflow: hidden;
   padding: 28px;
   background: #ffffff;
-  border: 1px solid var(--line);
+  border: none;
   border-radius: var(--card-radius);
   box-shadow: var(--shadow-sm);
-  transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
 }
 
 .service-card::before {
@@ -568,7 +568,6 @@ h3 {
 
 .service-card:hover {
   transform: translateY(-4px);
-  border-color: rgba(229, 45, 39, 0.35);
   box-shadow: 0 14px 38px rgba(0, 0, 0, 0.08);
 }
 
@@ -586,7 +585,6 @@ h3 {
   margin-bottom: 42px;
   color: var(--red);
   background: var(--red-soft);
-  border: 1px solid rgba(229, 45, 39, 0.22);
   border-radius: 999px;
   font-size: 12px;
   font-weight: 900;
@@ -614,7 +612,7 @@ h3 {
   min-height: 0;
   padding-block: 34px;
   background: linear-gradient(135deg, #ffffff 65%, rgba(229, 45, 39, 0.04) 100%);
-  border: 1px solid var(--line);
+  border: none;
 }
 
 .service-card-wide .service-number {
@@ -640,7 +638,7 @@ h3 {
   border-top: 1px solid var(--line);
 }
 
-.team-section > * {
+.team-section>* {
   position: relative;
   z-index: 1;
 }
@@ -660,7 +658,7 @@ h3 {
   margin-bottom: 22px;
 }
 
-.team-content > p:not(.eyebrow) {
+.team-content>p:not(.eyebrow) {
   margin-bottom: 30px;
   color: var(--muted);
   font-size: 18px;
@@ -678,8 +676,7 @@ h3 {
   min-height: 42px;
   padding: 10px 16px;
   background: var(--bg);
-  border: 1px solid var(--line);
-  border-left: 3px solid var(--red);
+  border: none;
   border-radius: var(--button-radius);
   color: var(--text);
   font-size: 14px;
@@ -692,7 +689,7 @@ h3 {
   margin: 0;
   overflow: hidden;
   background: var(--bg);
-  border: 1px solid var(--line);
+  border: none;
   border-radius: var(--card-radius);
   box-shadow: var(--shadow);
 }
@@ -749,7 +746,7 @@ h3 {
   overflow: hidden;
   padding: clamp(26px, 4vw, 42px);
   background: #ffffff;
-  border: 1px solid var(--line);
+  border: none;
   border-radius: var(--card-radius);
   box-shadow: var(--shadow);
   text-align: center;
@@ -804,7 +801,7 @@ h3 {
   margin-bottom: 26px;
   overflow: hidden;
   background: var(--bg);
-  border: 1px solid var(--line);
+  border: none;
   border-radius: var(--card-radius);
 }
 
@@ -874,7 +871,7 @@ h3 {
 
 .image-panel {
   min-height: 650px;
-  border: 1px solid var(--line);
+  border: none;
   border-radius: var(--card-radius);
   background-position: center left;
   box-shadow: var(--shadow);
@@ -885,7 +882,7 @@ h3 {
   max-width: 680px;
 }
 
-.content-panel > p:not(.eyebrow) {
+.content-panel>p:not(.eyebrow) {
   margin-bottom: 30px;
   font-size: 18px;
   color: var(--muted);
@@ -894,48 +891,21 @@ h3 {
 .steps {
   display: grid;
   position: relative;
-  gap: 14px;
-}
-
-.steps::before {
-  content: "";
-  position: absolute;
-  top: 28px;
-  bottom: 28px;
-  left: 51px;
-  width: 2px;
-  background: linear-gradient(180deg, rgba(229, 45, 39, 0), var(--red), rgba(229, 45, 39, 0));
+  gap: 12px;
 }
 
 .step {
   position: relative;
   display: grid;
-  grid-template-columns: 66px 1fr;
+  grid-template-columns: 46px 1fr;
   gap: 18px;
   align-items: center;
-  min-height: 118px;
   overflow: hidden;
-  padding: 22px 24px 22px 22px;
+  padding: 20px 24px;
   background: var(--bg);
   border: 1px solid var(--line);
   border-radius: var(--card-radius);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
-  transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
-}
-
-.step::before {
-  content: "";
-  position: absolute;
-  inset: 0 auto 0 0;
-  width: 3px;
-  background: linear-gradient(180deg, transparent, var(--red), transparent);
-  opacity: 0.82;
-}
-
-.step:hover {
-  transform: translateY(-2px);
-  border-color: rgba(229, 45, 39, 0.34);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.025);
 }
 
 .step span {
@@ -943,15 +913,16 @@ h3 {
   z-index: 1;
   display: grid;
   place-items: center;
-  width: 58px;
-  height: 58px;
-  background: linear-gradient(145deg, #ff2d38, var(--red));
-  border: 1px solid var(--red);
-  border-radius: var(--card-radius);
-  color: #ffffff;
-  font-size: 20px;
-  font-weight: 900;
-  box-shadow: var(--shadow-red);
+  width: 46px;
+  height: 46px;
+  background: #ffffff;
+  border: 1.5px solid rgba(229, 45, 39, 0.22);
+  border-radius: 50%;
+  color: var(--red);
+  font-size: 16px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  box-shadow: 0 3px 10px rgba(17, 19, 21, 0.05);
 }
 
 .step div {
@@ -998,19 +969,10 @@ h3 {
   aspect-ratio: 1195 / 896;
   overflow: hidden;
   isolation: isolate;
-  border: 1px solid rgba(0, 0, 0, 0.12);
+  border: none;
   border-radius: var(--card-radius);
   background: #111;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.14);
-}
-
-.work-comparison::before {
-  content: "";
-  position: absolute;
-  z-index: 2;
-  inset: 0;
-  border: 1px solid rgba(255, 255, 255, 0.28);
-  pointer-events: none;
 }
 
 .comparison-image {
@@ -1037,7 +999,7 @@ h3 {
   min-height: 34px;
   padding: 7px 14px;
   background: rgba(17, 19, 21, 0.82);
-  border: 1px solid rgba(255, 255, 255, 0.28);
+  border: none;
   border-radius: var(--card-radius);
   color: #ffffff;
   font-size: 13px;
@@ -1294,7 +1256,7 @@ h3 {
   align-items: center;
   background:
     linear-gradient(105deg, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.9) 48%, rgba(255, 255, 255, 0.65)),
-    url("offer.png");
+    url("offer.webp");
   background-position: center;
   background-size: cover;
   border-top: 1px solid var(--line);
@@ -1304,7 +1266,7 @@ h3 {
   width: min(820px, 100%);
   padding: clamp(24px, 4vw, 44px);
   background: rgba(255, 255, 255, 0.95);
-  border: 1px solid var(--line-strong);
+  border: none;
   border-radius: var(--card-radius);
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
   backdrop-filter: blur(18px);
@@ -1378,7 +1340,7 @@ h3 {
   width: min(520px, 100%);
   padding: clamp(24px, 4vw, 34px);
   background: #ffffff;
-  border: 1px solid var(--line-strong);
+  border: none;
   border-radius: var(--card-radius);
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.16);
   outline: none;
@@ -1592,7 +1554,7 @@ h3 {
     order: 2;
   }
 
-  .content-panel > p:not(.eyebrow) {
+  .content-panel>p:not(.eyebrow) {
     order: 3;
     margin-bottom: 0;
   }
@@ -1817,21 +1779,16 @@ h3 {
     min-height: 320px;
   }
 
-  .steps::before {
-    left: 43px;
-  }
-
   .step {
-    grid-template-columns: 52px 1fr;
+    grid-template-columns: 40px 1fr;
     gap: 14px;
-    min-height: 0;
-    padding: 18px 16px;
+    padding: 16px;
   }
 
   .step span {
-    width: 50px;
-    height: 50px;
-    font-size: 18px;
+    width: 40px;
+    height: 40px;
+    font-size: 15px;
   }
 
   .comparison-label {
