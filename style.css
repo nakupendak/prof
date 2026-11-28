@@ -1327,10 +1327,8 @@ h3 {
 
 .contact-section {
   display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
-  gap: clamp(20px, 3vw, 36px);
   min-height: 620px;
-  align-items: stretch;
+  align-items: center;
   background:
     linear-gradient(105deg, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.9) 48%, rgba(255, 255, 255, 0.65)),
     url("offer.webp");
@@ -1339,87 +1337,14 @@ h3 {
   border-top: 1px solid var(--line);
 }
 
-.contact-card,
-.contact-map-card {
-  width: 100%;
+.contact-card {
+  width: min(820px, 100%);
   padding: clamp(24px, 4vw, 44px);
   background: rgba(255, 255, 255, 0.95);
   border: none;
   border-radius: var(--card-radius);
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
   backdrop-filter: blur(18px);
-}
-
-.contact-card {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.contact-map-card {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  padding: clamp(22px, 3vw, 32px);
-}
-
-.contact-map-head {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 16px;
-  flex-wrap: wrap;
-}
-
-.contact-map-head .eyebrow {
-  margin-bottom: 6px;
-}
-
-.contact-map-head h3 {
-  margin: 0;
-  font-size: clamp(20px, 2.2vw, 24px);
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  color: var(--text);
-}
-
-.contact-map-link {
-  font-size: 14px;
-  font-weight: 800;
-  color: var(--red);
-  white-space: nowrap;
-  transition: opacity 0.18s ease;
-}
-
-.contact-map-link:hover,
-.contact-map-link:focus-visible {
-  text-decoration: underline;
-  text-underline-offset: 4px;
-}
-
-.contact-map-frame {
-  position: relative;
-  flex: 1;
-  min-height: 320px;
-  border-radius: calc(var(--card-radius) - 6px);
-  overflow: hidden;
-  border: none;
-  background: #eef1f4;
-}
-
-.contact-map-frame iframe {
-  display: block;
-  width: 100%;
-  height: 100%;
-  min-height: 320px;
-  border: 0;
-}
-
-.contact-map-note {
-  margin: 0;
-  color: var(--muted);
-  font-size: 14px;
-  line-height: 1.5;
 }
 
 .contact-lines {
@@ -1626,8 +1551,7 @@ h3 {
   .reveal-ready .team-content,
   .reveal-ready .team-photo,
   .reveal-ready .work-comparison,
-  .reveal-ready .contact-card,
-  .reveal-ready .contact-map-card {
+  .reveal-ready .contact-card {
     opacity: 0;
     transform: translateY(28px);
     transition: opacity 0.72s ease, transform 0.72s ease;
@@ -1997,11 +1921,6 @@ h3 {
     right: 12px;
     width: 38px;
     height: 38px;
-  }
-
-  .contact-map-frame,
-  .contact-map-frame iframe {
-    min-height: 260px;
   }
 }
 

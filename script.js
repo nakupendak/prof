@@ -9,7 +9,7 @@ const routeDialog = document.querySelector("[data-route-dialog]");
 const routeCloseControls = document.querySelectorAll("[data-route-close]");
 const routeLinks = document.querySelectorAll("[data-route-link]");
 const revealItems = document.querySelectorAll(
-  ".service-card, .review-card, .image-panel, .content-panel, .team-content, .team-photo, .work-comparison, .contact-card, .contact-map-card"
+  ".service-card, .review-card, .image-panel, .content-panel, .team-content, .team-photo, .work-comparison, .contact-card"
 );
 
 const syncHeader = () => {
